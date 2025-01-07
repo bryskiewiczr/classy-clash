@@ -38,6 +38,9 @@ int main() {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
+        // movement of the character is achieved by
+        // moving the game map texture, so that the character
+        // is always in the center of the screen
         Vector2 direction{};
         if (IsKeyDown(KEY_A)) direction.x -= 1.0;
         if (IsKeyDown(KEY_D)) direction.x += 1.0;
