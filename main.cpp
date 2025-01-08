@@ -34,14 +34,14 @@ int main() {
     int frame{};
     const int maxFrame{6};
     const float updateTime{1.0/12.0};
-    bool isKnightMoving{false};
+    bool knightMoving{false};
+    Texture2D activeSpritesheet{};
 
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        Texture2D activeSpritesheet{};
-        isKnightMoving ? activeSpritesheet = knightRunning : activeSpritesheet = knight;
+        knightMoving ? activeSpritesheet = knightRunning : activeSpritesheet = knight;
 
         // movement of the character is achieved by
         // moving the game map texture, so that the character
@@ -52,11 +52,11 @@ int main() {
         if (IsKeyDown(KEY_W)) direction.y -= 1.0;
         if (IsKeyDown(KEY_S)) direction.y += 1.0;
         if (Vector2Length(direction) != 0.0) {
-            isKnightMoving = true;
+            knightMoving = true;
             GameMap.position = Vector2Subtract(GameMap.position, Vector2Scale(Vector2Normalize(direction), speed));
             direction.x < 0.0f ? rightLeft = -1.0f : rightLeft = 1.0f;
         } else {
-            isKnightMoving = false;
+            knightMoving = false;
         }
 
         DrawTextureEx(GameMap.texture, GameMap.position, 0, 4, RAYWHITE);
